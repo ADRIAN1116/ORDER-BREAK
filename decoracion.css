@@ -1,0 +1,195 @@
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: url("fondo.jpg") center center/cover no-repeat fixed;
+}
+
+/* Barra superior */
+.barra-superior {
+  background: #4a2c2a;
+  color: #fff9f2;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Header */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  color: #4a2c2a;
+  font-size: 38px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: #c88a4d;
+}
+
+.navegacion {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navegacion a {
+  text-decoration: none;
+  color: #2b1d1a;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navegacion a:hover {
+  color: #c88a4d;
+}
+
+.navegacion .boton-pedido {
+  background: #4a2c2a;
+  color: #fff9f2;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.navegacion .boton-pedido:hover {
+  background: #c88a4d;
+  color: #fff9f2;
+}
+
+.hero {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.contenido {
+  color: white;
+  max-width: 650px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.contenido h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.contenido h1 span {
+  color: #f0b36b;
+}
+
+.descripcion {
+  font-size: 22px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.botones {
+  display: flex;
+  gap: 15px;
+}
+
+.boton-principal,
+.boton-secundario {
+  text-decoration: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.boton-principal {
+  background: #4a2c2a;
+  color: white;
+}
+
+.boton-principal:hover {
+  background: #c88a4d;
+}
+
+.boton-secundario {
+  background: white;
+  color: #4a2c2a;
+}
+
+.boton-secundario:hover {
+  background: #f0b36b;
+  color: white;
+}
+
+.como-funciona {
+  background: #fff9f2;
+  padding: 60px 8%;
+  text-align: center;
+}
+
+.como-funciona h2 {
+  color: #4a2c2a;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.pasos {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.paso {
+  background: white;
+  width: 30%;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.numero {
+  background: #4a2c2a;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  font-weight: bold;
+}
+
+.paso h3 {
+  color: #4a2c2a;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.paso p {
+  color: #555;
+  line-height: 1.5;
+}
+
+footer {
+  background: #4a2c2a;
+  text-align: center;
+  padding: 20px;
+  color: #fff9f2;
+}
