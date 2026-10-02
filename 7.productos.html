@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú - OrderBreak</title>
-
     <link rel="stylesheet" href="decoracion.css">
 </head>
-
 <body>
+    <div class="barra-superior"> ☕ BIENVENIDO A ORDERBREAK </div>
 
     <header>
         <div class="logo">ORDER <span>BREAK</span></div>
         <nav class="navegacion">
             <a href="5.inicio.html">Inicio</a>
             <a href="7.productos.html">Menú</a>
-            <a href="#contacto">Contacto</a>
-            <a href="#pedido" class="boton-pedido">Mi pedido</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html" class="boton-pedido">Mi pedido</a>
         </nav>
     </header>
 
     <section class="hero">
-
         <div class="pedido-box">
-
             <h2>Menú</h2>
 
             <button onclick="agregar('Café Americano',5000)">
@@ -41,13 +38,9 @@
             <button onclick="location.href='carrito.html'">
                 🛒 Ver Carrito
             </button>
-
         </div>
-
     </section>
 
     <script src="8. productos.js"></script>
-
 </body>
-
 </html>
