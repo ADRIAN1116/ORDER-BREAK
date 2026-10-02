@@ -1,6 +1,5 @@
-// Verificar sesión
 if (localStorage.getItem("sesion") !== "activa") {
-    window.location.href = "login.html";
+    window.location.href = "3.login.html";
 }
 
 // Cerrar sesión
