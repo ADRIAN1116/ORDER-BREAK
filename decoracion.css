@@ -80,13 +80,15 @@ header {
   min-height: 75vh;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 8%;
   background: rgba(0, 0, 0, 0.35);
+  gap: 50px;
 }
 
 .contenido {
   color: white;
-  padding-right: 50px;
+  flex: 1;
   max-width: 800px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
@@ -110,6 +112,7 @@ header {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
 .pedido-box h2 {
