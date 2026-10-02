@@ -11,15 +11,22 @@ body {
 
 /* Barra superior */
 .barra-superior {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
   background: #4a2c2a;
   color: #fff9f2;
   text-align: center;
   padding: 10px;
   font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Header */
 header {
+  position: sticky;
+  top: 42px;
+  z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   display: flex;
   justify-content: space-between;
