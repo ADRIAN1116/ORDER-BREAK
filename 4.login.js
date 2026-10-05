@@ -14,9 +14,8 @@ document.getElementById("btnLogin").addEventListener("click", () => {
         passwordIngresada === usuarioGuardado.password
     ) {
         localStorage.setItem("sesion", "activa");
-        window.location.href = "5.inicio.html";
+        window.location.href = "inicio.html";
     } else {
         alert("Datos incorrectos");
     }
 });
-``
