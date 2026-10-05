@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi pedido - OrderBreak</title>
+    <link rel="stylesheet" href="decoracion.css">
+    <style>
+        .carrito-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .carrito-items {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .item-carrito:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-nombre {
+            font-weight: bold;
+            color: #4a2c2a;
+            margin-bottom: 5px;
+        }
+
+        .item-precio {
+            color: #c88a4d;
+            font-weight: bold;
+        }
+
+        .item-cantidad {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-cantidad button {
+            background: #4a2c2a;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .item-cantidad button:hover {
+            background: #c88a4d;
+        }
+
+        .btn-eliminar {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-eliminar:hover {
+            background: #b71c1c;
+        }
+
+        .resumen {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .resumen-titulo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a2c2a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .resumen-fila {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .resumen-fila.total {
+            border-top: 2px solid #eee;
+            padding-top: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a2c2a;
+        }
+
+        .metodos-pago {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .metodos-titulo {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a2c2a;
+            margin-bottom: 12px;
+        }
+
+        .metodo-pago {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .metodo-pago:hover {
+            border-color: #c88a4d;
+            background: #fafafa;
+        }
+
+        .metodo-pago input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .metodo-pago label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .metodo-icono {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .tarjeta-campos {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            gap: 10px;
+        }
+
+        .tarjeta-campos.activa {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tarjeta-campos input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .campo-fila {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .botones-accion {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-primario {
+            flex: 1;
+            background: #4a2c2a;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primario:hover {
+            background: #c88a4d;
+        }
+
+        .btn-secundario {
+            flex: 1;
+            background: #f0f0f0;
+            color: #333;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-secundario:hover {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .carrito-container {
+                grid-template-columns: 1fr;
+            }
+
+            .resumen {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="barra-superior"> ☕ BIENVENIDO A ORDERBREAK </div>
+
+    <header>
+        <div class="logo">ORDER <span>BREAK</span></div>
+        <nav class="navegacion">
+            <a href="5.inicio.html">Inicio</a>
+            <a href="7.productos.html">Menú</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html" class="boton-pedido">Mi pedido</a>
+        </nav>
+    </header>
+
+    <div class="carrito-container">
+        <div class="carrito-items">
+            <h2>Mi Carrito</h2>
+            <div id="lista-carrito"></div>
+        </div>
+
+        <div class="resumen">
+            <div class="resumen-titulo">Resumen del Pedido</div>
+            
+            <div class="resumen-fila">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0</span>
+            </div>
+            
+            <div class="resumen-fila">
+                <span>Impuesto (8%):</span>
+                <span id="impuesto">$0</span>
+            </div>
+            
+            <div class="resumen-fila total">
+                <span>Total:</span>
+                <span id="total-carrito">$0</span>
+            </div>
+
+            <div class="metodos-pago">
+                <div class="metodos-titulo">Método de Pago</div>
+
+                <div class="metodo-pago">
+                    <input type="radio" id="metodo-nequi" name="metodo" value="nequi" onchange="cambiarMetodo('nequi')">
+                    <label for="metodo-nequi">
+                        <span class="metodo-icono">📱</span>
+                        Nequi
+                    </label>
+                </div>
+
+                <div class="metodo-pago">
+                    <input type="radio" id="metodo-efectivo" name="metodo" value="efectivo" onchange="cambiarMetodo('efectivo')">
+                    <label for="metodo-efectivo">
+                        <span class="metodo-icono">💵</span>
+                        Efectivo
+                    </label>
+                </div>
+
+                <div class="metodo-pago">
+                    <input type="radio" id="metodo-tarjeta" name="metodo" value="tarjeta" onchange="cambiarMetodo('tarjeta')">
+                    <label for="metodo-tarjeta">
+                        <span class="metodo-icono">💳</span>
+                        Tarjeta de Crédito
+                    </label>
+                </div>
+
+                <div class="metodo-pago">
+                    <input type="radio" id="metodo-daviplata" name="metodo" value="daviplata" onchange="cambiarMetodo('daviplata')">
+                    <label for="metodo-daviplata">
+                        <span class="metodo-icono">🏦</span>
+                        DaviPlata
+                    </label>
+                </div>
+
+                <div id="tarjeta-campos" class="tarjeta-campos">
+                    <input type="text" id="numero-tarjeta" placeholder="Número de tarjeta (16 dígitos)" maxlength="16">
+                    <div class="campo-fila">
+                        <input type="text" id="vencimiento" placeholder="MM/YY" maxlength="5">
+                        <input type="text" id="cvv" placeholder="CVV" maxlength="3">
+                    </div>
+                    <input type="text" id="titular" placeholder="Nombre del titular">
+                </div>
+            </div>
+
+            <div class="botones-accion">
+                <button class="btn-secundario" onclick="location.href='7.productos.html'">Seguir Comprando</button>
+                <button class="btn-primario" id="btn-pagar">Confirmar Pedido</button>
+            </div>
+
+            <button class="btn-secundario" style="width: 100%; margin-top: 10px;" onclick="limpiarCarrito()">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    <script>
+        // Verificar sesión
+        if (localStorage.getItem("sesion") !== "activa") {
+            window.location.href = "3.login.html";
+        }
+
+        function actualizarCarrito() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const lista = document.getElementById('lista-carrito');
+
+            if (carrito.length === 0) {
+                lista.innerHTML = '<div class="carrito-vacio"><p>No tienes productos agregados.</p></div>';
+                document.getElementById('subtotal').textContent = '$0';
+                document.getElementById('impuesto').textContent = '$0';
+                document.getElementById('total-carrito').textContent = '$0';
+                return;
+            }
+
+            lista.innerHTML = '';
+            let subtotal = 0;
+
+            carrito.forEach((item, index) => {
+                subtotal += item.precio;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item-carrito';
+                itemDiv.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-nombre">${item.nombre}</div>
+                        <div class="item-precio">$${item.precio.toLocaleString('es-CO')}</div>
+                    </div>
+                    <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">Eliminar</button>
+                `;
+                lista.appendChild(itemDiv);
+            });
+
+            const impuesto = Math.round(subtotal * 0.08);
+            const total = subtotal + impuesto;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toLocaleString('es-CO')}`;
+            document.getElementById('impuesto').textContent = `$${impuesto.toLocaleString('es-CO')}`;
+            document.getElementById('total-carrito').textContent = `$${total.toLocaleString('es-CO')}`;
+        }
+
+        function eliminarDelCarrito(index) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarCarrito();
+        }
+
+        function limpiarCarrito() {
+            if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+                localStorage.removeItem('carrito');
+                actualizarCarrito();
+            }
+        }
+
+        function cambiarMetodo(metodo) {
+            const campos = document.getElementById('tarjeta-campos');
+            if (metodo === 'tarjeta') {
+                campos.classList.add('activa');
+            } else {
+                campos.classList.remove('activa');
+            }
+            localStorage.setItem('metodo-pago', metodo);
+        }
+
+        document.getElementById('btn-pagar').addEventListener('click', () => {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const metodoPago = document.querySelector('input[name="metodo"]:checked');
+
+            if (carrito.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            if (!metodoPago) {
+                alert('Por favor selecciona un método de pago');
+                return;
+            }
+
+            if (metodoPago.value === 'tarjeta') {
+                const numero = document.getElementById('numero-tarjeta').value;
+                const vencimiento = document.getElementById('vencimiento').value;
+                const cvv = document.getElementById('cvv').value;
+                const titular = document.getElementById('titular').value;
+
+                if (!numero || !vencimiento || !cvv || !titular) {
+                    alert('Por favor completa todos los datos de la tarjeta');
+                    return;
+                }
+
+                if (numero.length !== 16) {
+                    alert('El número de tarjeta debe tener 16 dígitos');
+                    return;
+                }
+
+                if (cvv.length !== 3) {
+                    alert('El CVV debe tener 3 dígitos');
+                    return;
+                }
+            }
+
+            const subtotal = carrito.reduce((sum, item) => sum + item.precio, 0);
+            const impuesto = Math.round(subtotal * 0.08);
+            const total = subtotal + impuesto;
+
+            const pedido = {
+                items: carrito,
+                subtotal: subtotal,
+                impuesto: impuesto,
+                total: total,
+                metodo: metodoPago.value,
+                fecha: new Date().toLocaleString('es-CO'),
+                estado: 'Pagado'
+            };
+
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            pedidos.push(pedido);
+            localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+            alert('¡Pedido realizado exitosamente!\n\nTotal: $' + total.toLocaleString('es-CO') + '\nMétodo: ' + metodoPago.value.toUpperCase() + '\n\nTu pedido será preparado en breve.');
+
+            localStorage.removeItem('carrito');
+            actualizarCarrito();
+            document.querySelector('input[name="metodo"]').checked = false;
+            document.getElementById('tarjeta-campos').classList.remove('activa');
+        });
+
+        actualizarCarrito();
+    </script>
+</body>
+</html>
