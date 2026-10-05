@@ -6,17 +6,17 @@ document.getElementById("btnRegistro").addEventListener("click", () => {
     const password = document.getElementById("password").value;
     const confirmar = document.getElementById("confirmarPassword").value;
 
-    if(
+    if (
         nombre === "" ||
         correo === "" ||
         usuario === "" ||
         password === ""
-    ){
+    ) {
         alert("Complete todos los campos");
         return;
     }
 
-    if(password !== confirmar){
+    if (password !== confirmar) {
         alert("Las contraseñas no coinciden");
         return;
     }
@@ -28,13 +28,8 @@ document.getElementById("btnRegistro").addEventListener("click", () => {
         password
     };
 
-    localStorage.setItem(
-        "usuario",
-        JSON.stringify(usuarioNuevo)
-    );
+    localStorage.setItem("usuario", JSON.stringify(usuarioNuevo));
 
     alert("Registro exitoso");
-
-    location.href = "3.login.html";
+    location.href = "login.html";
 });
-``
