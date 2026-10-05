@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-
     <link rel="stylesheet" href="decoracion.css">
-
 </head>
 
 <body>
-
+    <div class="barra-superior"> ☕ BIENVENIDO A ORDER BREAK </div>
     <header>
         <div class="logo">
-            ORDER Break
+            ORDER <span>BREAK</span>
         </div>
+        <nav class="navegacion">
+            <a href="inicio.html">Inicio</a>
+            <a href="productos.html">Menú</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html" class="boton-pedido">Mi pedido</a>
+        </nav>
     </header>
 
     <section class="hero">
@@ -23,6 +27,7 @@
         <div class="pedido-box">
 
             <h2>Iniciar Sesión</h2>
+            <br><br>
 
             <input type="text" id="usuario" placeholder="Usuario">
 
@@ -32,11 +37,16 @@
                 Iniciar
             </button>
 
+            <p style="margin-top: 15px; text-align: center;">
+                ¿No tienes cuenta?
+                <a href="registro.html">Regístrate</a>
+            </p>
+
         </div>
 
     </section>
 
-    <script src="4.login.js"></script>
+    <script src="login.js"></script>
 
 </body>
 
